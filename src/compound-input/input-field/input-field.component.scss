@@ -1,0 +1,18 @@
+.container__input {
+  background: blue;
+  border: none;
+  outline: none;
+  padding: 0;
+  text-align: right;
+
+  -webkit-font-smoothing: antialiased;
+  font-family: var(--mdc-typography-button-font-family, var(--mdc-typography-font-family, Roboto, sans-serif));
+  font-size: var(--mdc-typography-button-font-size, 14px);
+  line-height: var(--mdc-typography-button-line-height, 36px);
+  font-weight: var(--mdc-typography-button-font-weight, 500);
+  letter-spacing: var(--mdc-typography-button-letter-spacing, 0.0892857143em);
+  -webkit-text-decoration: var(--mdc-typography-button-text-decoration, none);
+  text-decoration: var(--mdc-typography-button-text-decoration, none);
+  text-transform: var(--mdc-typography-button-text-transform, none);
+  
+}

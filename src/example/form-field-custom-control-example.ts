@@ -7,8 +7,10 @@ import {
   Input,
   OnDestroy,
   Optional,
+  QueryList,
   Self,
   ViewChild,
+  ViewChildren,
   forwardRef,
 } from '@angular/core';
 import {
@@ -30,6 +32,11 @@ import {
 } from '@angular/material/form-field';
 import {Subject} from 'rxjs';
 import {MatIconModule} from '@angular/material/icon';
+import {MatSelectModule} from '@angular/material/select';
+import {MatMenuItem, MatMenuModule} from '@angular/material/menu';
+import {MatButtonModule} from '@angular/material/button';
+import {MatDividerModule} from '@angular/material/divider';
+import { JsonPipe } from '@angular/common';
 
 /** @title Form field with custom telephone number input control. */
 @Component({
@@ -42,12 +49,16 @@ import {MatIconModule} from '@angular/material/icon';
     MatFormFieldModule,
     forwardRef(() => MyTelInput),
     MatIconModule,
+    JsonPipe,
+    MatButtonModule,
+MatIconModule
   ],
 })
 export class FormFieldCustomControlExample {
   form: FormGroup = new FormGroup({
     tel: new FormControl(new MyTel('', '', '')),
   });
+  
 }
 
 /** Data structure for holding telephone number. */
@@ -66,10 +77,11 @@ export class MyTel {
     '[id]': 'id',
   },
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule, MatSelectModule, MatMenuModule, MatButtonModule, MatIconModule, MatDividerModule],
 })
 export class MyTelInput implements ControlValueAccessor, MatFormFieldControl<MyTel>, OnDestroy {
   static nextId = 0;
+  @ViewChildren(MatMenuItem) menuItems: QueryList<MatMenuItem>;
   @ViewChild('area') areaInput: HTMLInputElement;
   @ViewChild('exchange') exchangeInput: HTMLInputElement;
   @ViewChild('subscriber') subscriberInput: HTMLInputElement;
@@ -170,6 +182,10 @@ export class MyTelInput implements ControlValueAccessor, MatFormFieldControl<MyT
     });
   }
 
+  setFocusOnItem() {
+    // this.menuItems.find();
+  };
+
   ngOnDestroy() {
     this.stateChanges.complete();
     this._focusMonitor.stopMonitoring(this._elementRef);
@@ -191,17 +207,17 @@ export class MyTelInput implements ControlValueAccessor, MatFormFieldControl<MyT
     }
   }
 
-  autoFocusNext(control: AbstractControl, nextElement?: HTMLInputElement): void {
-    if (!control.errors && nextElement) {
-      this._focusMonitor.focusVia(nextElement, 'program');
-    }
-  }
+  // autoFocusNext(control: AbstractControl, nextElement?: HTMLInputElement): void {
+  //   if (!control.errors && nextElement) {
+  //     this._focusMonitor.focusVia(nextElement, 'program');
+  //   }
+  // }
 
-  autoFocusPrev(control: AbstractControl, prevElement: HTMLInputElement): void {
-    if (control.value.length < 1) {
-      this._focusMonitor.focusVia(prevElement, 'program');
-    }
-  }
+  // autoFocusPrev(control: AbstractControl, prevElement: HTMLInputElement): void {
+  //   if (control.value.length < 1) {
+  //     this._focusMonitor.focusVia(prevElement, 'program');
+  //   }
+  // }
 
   setDescribedByIds(ids: string[]) {
     const controlElement = this._elementRef.nativeElement.querySelector(
@@ -211,15 +227,15 @@ export class MyTelInput implements ControlValueAccessor, MatFormFieldControl<MyT
   }
 
   onContainerClick() {
-    if (this.parts.controls.subscriber.valid) {
-      this._focusMonitor.focusVia(this.subscriberInput, 'program');
-    } else if (this.parts.controls.exchange.valid) {
-      this._focusMonitor.focusVia(this.subscriberInput, 'program');
-    } else if (this.parts.controls.area.valid) {
-      this._focusMonitor.focusVia(this.exchangeInput, 'program');
-    } else {
-      this._focusMonitor.focusVia(this.areaInput, 'program');
-    }
+    // if (this.parts.controls.subscriber.valid) {
+    //   this._focusMonitor.focusVia(this.subscriberInput, 'program');
+    // } else if (this.parts.controls.exchange.valid) {
+    //   this._focusMonitor.focusVia(this.subscriberInput, 'program');
+    // } else if (this.parts.controls.area.valid) {
+    //   this._focusMonitor.focusVia(this.exchangeInput, 'program');
+    // } else {
+    //   this._focusMonitor.focusVia(this.areaInput, 'program');
+    // }
   }
 
   writeValue(tel: MyTel | null): void {
@@ -239,7 +255,7 @@ export class MyTelInput implements ControlValueAccessor, MatFormFieldControl<MyT
   }
 
   _handleInput(control: AbstractControl, nextElement?: HTMLInputElement): void {
-    this.autoFocusNext(control, nextElement);
+    // this.autoFocusNext(control, nextElement);
     this.onChange(this.value);
   }
 }

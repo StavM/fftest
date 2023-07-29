@@ -8,7 +8,7 @@
   padding: 0;
   outline: none;
   font: inherit;
-  text-align: center;
+  text-align: right;
 }
 
 .example-tel-input-spacer {
@@ -18,4 +18,28 @@
 
 :host.example-floating .example-tel-input-spacer {
   opacity: 1;
+}
+
+input {
+  /* background: red; */
+  flex: 3;
+  width: 75%
+}
+
+button{
+  flex: 1;
+  /* background: blue; */
+}
+
+::ng-deep .asd {
+  max-height: 200px;
+}
+
+::ng-deep .asd .selected {
+  background: var(--mat-option-focus-state-layer-color);
+}
+
+mat-divider {
+  height: 100%;
+  /* position: absolute; */
 }
