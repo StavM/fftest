@@ -1,9 +1,32 @@
-<div class="container">
 
-    <app-input-field />
+<div role="group" class="container"
+     [formGroup]="parts"
+     (focusin)="onFocusIn($event)"
+     (focusout)="onFocusOut($event)">
+
+    <div class="container__input">
+        <input matInput
+               formControlName="input"
+               aria-label="Input number"
+               (input)="onInput()"
+               #input>
+    </div>
 
     <mat-divider vertical/>
 
-    <app-menu-field />
+    <div class="container__button">
+        <input type="hidden" formControlName="select" >
+        <button type="button" mat-button [matMenuTriggerFor]="menu">
+            {{ parts.value.select || '' }}
+            <mat-icon iconPositionEnd color="primary">keyboard_arrow_down</mat-icon>
+        </button>
+        <mat-menu class="container__menu" #menu="matMenu">
+            <button mat-menu-item (click)="onSelect('0')">Item 0</button>
+            <button mat-menu-item (click)="onSelect('1')">Item 1</button>
+            <button mat-menu-item (click)="onSelect('2')">Item 2</button>
+            <button mat-menu-item (click)="onSelect('3')">Item 3</button>
+            <button mat-menu-item (click)="onSelect('4')">Item 4</button>
+        </mat-menu>
+    </div>
 
 </div>

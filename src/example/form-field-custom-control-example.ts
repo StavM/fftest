@@ -91,6 +91,7 @@ export class MyTelInput implements ControlValueAccessor, MatFormFieldControl<MyT
     exchange: FormControl<string | null>;
     subscriber: FormControl<string | null>;
   }>;
+
   stateChanges = new Subject<void>();
   focused = false;
   touched = false;
@@ -184,7 +185,7 @@ export class MyTelInput implements ControlValueAccessor, MatFormFieldControl<MyT
 
   setFocusOnItem() {
     // this.menuItems.find();
-  };
+  }; 
 
   ngOnDestroy() {
     this.stateChanges.complete();
