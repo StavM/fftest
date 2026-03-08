@@ -1,0 +1,45 @@
+break shellcomms:
+
+ - PortalUserService
+   - get user data
+   - get persona data
+   - get user app ids
+   - get user manager codes
+   - get user allowed mfes
+
+- PortalNavigationService
+   - get mfeItems
+   - getNavigationItems
+   - getNavigationEntitlements
+   - get route tree
+   - get party role code to navigation items map
+   - get party role code to manager codes map
+   - get party role code to entitlement map
+   - set route tree
+
+- PortalWhitelabelService
+   - get Whitelabel
+   - set Whitelabel
+   - get WhitelabelLogo
+
+- PortalSessionService
+   - get session events
+   - logout({ show dialog})
+   - close child tabs
+
+- PortalCacheService
+   - get cache item (key)
+   - set cache item (key, value)
+   - delete cache item (key)
+   - clear cache
+   
+- PortalCoreService
+   - get user config
+   - get firm config
+
+- PortalFeatureService
+   - get feature flag
+   - set feature flag
+   - get feature setting
+   - set feature setting
+   - clear feature setting
